@@ -6,4 +6,17 @@ const map = function(mapper, elements){
   return result;
 }
 
-module.exports = { map };
+const filter = function(predicate, elements) {
+  let result = [];
+  for(element of elements){
+    if(predicate(element)) {
+      result.push(element);
+    }
+  }
+  return result;
+}
+
+module.exports = { 
+  map, 
+  filter
+};
