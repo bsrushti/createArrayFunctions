@@ -2,7 +2,8 @@ const assert = require('assert');
 const lib = require('./arrayFunctionsLib.js');
 const {
   map,
-  filter
+  filter,
+  reduce
 } = lib;
 
 const square = function(number) { 
@@ -11,6 +12,10 @@ const square = function(number) {
 
 const isEven = function(number) {
   return number % 2 === 0;
+}
+
+const add = function(number1, number2) { 
+  return number1 + number2;
 }
 
 const testMap = function() {
@@ -29,5 +34,15 @@ const testFilter = function() {
   console.log("filter function tested");
 }
 
+const testReduce = function() { 
+  assert.equal(reduce(add, 1, []),1);
+  assert.equal(reduce(add, 0, [1]),1);
+  assert.equal(reduce(add, 3, [1,2]),6);
+  assert.equal(reduce(add, 5, [5,5,5,5]),25);
+  assert.equal(reduce(add, -1, [0,2,-2,0]),-1);
+  console.log("reduce function tested");
+}
+
 testMap();
 testFilter();
+testReduce();

@@ -16,7 +16,23 @@ const filter = function(predicate, elements) {
   return result;
 }
 
+const reduce = function(reducer, accumulator, elements) { 
+  let result = elements[0];
+  let index = 1;
+
+  if(accumulator) {
+    result = accumulator;
+    index = 0;
+  }
+
+  while(index < elements.length) {
+    result = reducer(result, elements[index++]);
+  }
+  return result;
+}
+
 module.exports = { 
   map, 
-  filter
+  filter,
+  reduce
 };
