@@ -26,56 +26,40 @@ const add = function(number1, number2) {
 
 describe('Map',function(){
 
-  describe('Square',function(){
-    it('should get square of empty array as empty',function() {
-      assert.deepEqual(map(square,[]),[]);
-    });
-
-    it('should get square of array of single element',function() {
-      assert.deepEqual(map(square,[1]),[1]);
-    });
-
-    it('should get square of array of positive elements',function() {
-      assert.deepEqual(map(square,[1,2,3]),[1,4,9]);
-    });
-
-    it('should get square of array of negative elements',function() {
-      assert.deepEqual(map(square,[-1,-2,-3]),[1,4,9]);
-    });
+  incrementBy = increment(1);
+  it('should return empty array, when empty array is passed',function() {
+    assert.deepEqual(map(square,[]),[]);
+    assert.deepEqual(map(incrementBy,[]),[]);
   });
 
-  describe('Increment',function(){
-    incrementBy = increment(1);
-    it('should get increment of empty array as empty',function() {
-      assert.deepEqual(map(incrementBy,[]),[]);
-    });
+  it('should return array of single element, when array of single element is passed',function() {
+    assert.deepEqual(map(square,[0]),[0]);
+    assert.deepEqual(map(incrementBy,[0]),[1]);
+    assert.deepEqual(map(square,[1]),[1]);
+    assert.deepEqual(map(incrementBy,[1]),[2]);
+  });
 
-    it('should get increment all positive array elements by one',function() {
-      assert.deepEqual(map(incrementBy,[1,2,3]),[2,3,4]);
-    });
-
-    it('should get increment all negative array elements by one',function() {
-      assert.deepEqual(map(incrementBy,[-1,-2,-3]),[0,-1,-2]);
-    });
+  it('should preserve the length of array, when array of multiple elements is passed',function() {
+    assert.deepEqual(map(square,[1,2,3]),[1,4,9]);
+    assert.deepEqual(map(square,[-1,-2,-3]),[1,4,9]);
+    assert.deepEqual(map(incrementBy,[1,2,3]),[2,3,4]);
+    assert.deepEqual(map(incrementBy,[-1,-2,-3]),[0,-1,-2]);
   });
 
 });
 
 describe('Filter',function(){
 
-  it('should filter even elements from empty array as empty',function(){
+  it('should return empty array, when empty array is passed',function() {
     assert.deepEqual(filter(isEven,[]),[]);
   });
 
-  it('should filter even elements from  array of single element',function(){
-    assert.deepEqual(filter(isEven,[1]),[]);
+  it('should return array of single element,when only one element is true',function() {
+    assert.deepEqual(filter(isEven,[2,1,3]),[2]);
   });
 
-  it('should filter even elements from array of positive elements',function(){
+  it('should return array of multiple elements, when more than one element is true',function(){
     assert.deepEqual(filter(isEven,[1,2,3,4,5,6]),[2,4,6]);
-  });
-
-  it('should filter even elements from array of negative elements',function(){
     assert.deepEqual(filter(isEven,[-1,-2,-3,-4,-5,-6]),[-2,-4,-6]);
   });
 
@@ -83,20 +67,14 @@ describe('Filter',function(){
 
 describe('Reduce',function(){
 
-  it('testing for empty array, should return value of accumulator',function() { 
+  it('should return value of accumulator, when empty array is passed',function() { 
     assert.equal(reduce(add, 1, []),1);
   });
 
-  it('should get summition of array of single element',function() { 
+  it('should return result, when one or more elements in array is passed',function() { 
     assert.equal(reduce(add, 0, [1]),1);
-  });
-
-  it('should get summition of array of positive elements',function() { 
     assert.equal(reduce(add, 3, [1,2]),6);
     assert.equal(reduce(add, 5, [5,5,5,5]),25);
-  });
-
-  it('should get summition of array of negative elements',function() { 
     assert.equal(reduce(add, -1, [-1,-2,-2,-3]),-9);
   });
 
