@@ -10,6 +10,12 @@ const square = function(number) {
   return number * number;
 }
 
+const increment = function(incrementBy) { 
+  return function(number) {
+    return number + incrementBy;
+  }
+}
+
 const isEven = function(number) {
   return number % 2 === 0;
 }
@@ -20,20 +26,37 @@ const add = function(number1, number2) {
 
 describe('Map',function(){
 
-  it('should get square of empty array as empty',function() {
-    assert.deepEqual(map(square,[]),[]);
+  describe('Square',function(){
+    it('should get square of empty array as empty',function() {
+      assert.deepEqual(map(square,[]),[]);
+    });
+
+    it('should get square of array of single element',function() {
+      assert.deepEqual(map(square,[1]),[1]);
+    });
+
+    it('should get square of array of positive elements',function() {
+      assert.deepEqual(map(square,[1,2,3]),[1,4,9]);
+    });
+
+    it('should get square of array of negative elements',function() {
+      assert.deepEqual(map(square,[-1,-2,-3]),[1,4,9]);
+    });
   });
 
-  it('should get square of array of single element',function() {
-    assert.deepEqual(map(square,[1]),[1]);
-  });
+  describe('Increment',function(){
+    incrementBy = increment(1);
+    it('should get increment of empty array as empty',function() {
+      assert.deepEqual(map(incrementBy,[]),[]);
+    });
 
-  it('should get square of array of positive elements',function() {
-    assert.deepEqual(map(square,[1,2,3]),[1,4,9]);
-  });
+    it('should get increment all positive array elements by one',function() {
+      assert.deepEqual(map(incrementBy,[1,2,3]),[2,3,4]);
+    });
 
-  it('should get square of array of negative elements',function() {
-    assert.deepEqual(map(square,[-1,-2,-3]),[1,4,9]);
+    it('should get increment all negative array elements by one',function() {
+      assert.deepEqual(map(incrementBy,[-1,-2,-3]),[0,-1,-2]);
+    });
   });
 
 });
