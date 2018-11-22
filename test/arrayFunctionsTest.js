@@ -24,6 +24,14 @@ const add = function(number1, number2) {
   return number1 + number2;
 }
 
+const returnTrue = function() { 
+  return true;
+}
+
+const returnFalse = function() { 
+  return false;
+}
+
 describe('Map',function(){
 
   incrementBy = increment(1);
@@ -52,15 +60,20 @@ describe('Filter',function(){
 
   it('should return empty array, when empty array is passed',function() {
     assert.deepEqual(filter(isEven,[]),[]);
+    assert.deepEqual(filter(returnTrue,[]),[]);
   });
 
   it('should return array of single element,when only one element is true',function() {
     assert.deepEqual(filter(isEven,[2,1,3]),[2]);
+    assert.deepEqual(filter(returnTrue,[2]),[2]);
   });
 
   it('should return array of multiple elements, when more than one element is true',function(){
     assert.deepEqual(filter(isEven,[1,2,3,4,5,6]),[2,4,6]);
     assert.deepEqual(filter(isEven,[-1,-2,-3,-4,-5,-6]),[-2,-4,-6]);
+    assert.deepEqual(filter(returnTrue,[1,2,3,4,5,6]),[1,2,3,4,5,6]);
+    assert.deepEqual(filter(returnTrue,[-1,-2,-3,-4,-5,-6]),[-1,-2,-3,-4,-5,-6]);
+    assert.deepEqual(filter(returnFalse,[-1,-2,-3,-4,-5,-6]),[]);
   });
 
 });
