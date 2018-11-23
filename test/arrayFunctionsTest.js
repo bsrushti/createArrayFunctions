@@ -4,7 +4,8 @@ const {
   map,
   filter,
   reduce,
-  mapPrime
+  mapPrime,
+  filterPrime
 } = lib;
 
 const square = function(number) { 
@@ -122,6 +123,28 @@ describe('MapPrime',function(){
     assert.deepEqual(mapPrime(square,[-1,-2,-3]),[1,4,9]);
     assert.deepEqual(mapPrime(incrementBy,[1,2,3]),[2,3,4]);
     assert.deepEqual(mapPrime(incrementBy,[-1,-2,-3]),[0,-1,-2]);
+  });
+
+});
+
+describe('FilterPrime',function(){
+
+  it('should return empty array, when empty array is passed',function() {
+    assert.deepEqual(filterPrime(isEven,[]),[]);
+    assert.deepEqual(filterPrime(returnTrue,[]),[]);
+  });
+
+  it('should return array of single element,when only one element is true',function() {
+    assert.deepEqual(filterPrime(isEven,[2,1,3]),[2]);
+    assert.deepEqual(filterPrime(returnTrue,[2]),[2]);
+  });
+
+  it('should return array of multiple elements, when more than one element is true',function(){
+    assert.deepEqual(filterPrime(isEven,[1,2,3,4,5,6]),[2,4,6]);
+    assert.deepEqual(filterPrime(isEven,[-1,-2,-3,-4,-5,-6]),[-2,-4,-6]);
+    assert.deepEqual(filterPrime(returnTrue,[1,2,3,4,5,6]),[1,2,3,4,5,6]);
+    assert.deepEqual(filterPrime(returnTrue,[-1,-2,-3,-4,-5,-6]),[-1,-2,-3,-4,-5,-6]);
+    assert.deepEqual(filterPrime(returnFalse,[-1,-2,-3,-4,-5,-6]),[]);
   });
 
 });

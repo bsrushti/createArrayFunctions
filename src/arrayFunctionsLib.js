@@ -42,9 +42,23 @@ const reducerOfMap = function(mapper) {
   }
 }
 
+const reducerOfFilter = function(predicate) { 
+  return function(accumulator, element) {
+    if(predicate(element)) {
+      accumulator.push(element);
+    }
+    return accumulator;
+  }
+}
+
+const filterPrime = function(mapper, elements) { 
+  return reduce(reducerOfFilter(mapper), [], elements);
+}
+
 module.exports = { 
   map, 
   filter,
   reduce,
-  mapPrime
+  mapPrime,
+  filterPrime
 };
