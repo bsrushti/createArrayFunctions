@@ -3,7 +3,8 @@ const lib = require('../src/arrayFunctionsLib.js');
 const {
   map,
   filter,
-  reduce
+  reduce,
+  mapPrime
 } = lib;
 
 const square = function(number) { 
@@ -97,6 +98,30 @@ describe('Reduce',function(){
     assert.equal(reduce(multiplication, 1, [0]),0);
     assert.equal(reduce(multiplication, 3, [1,2]),6);
     assert.equal(reduce(multiplication, -1, [-1,-2,-2]),4);
+  });
+
+});
+
+describe('MapPrime',function(){
+
+  incrementBy = increment(1);
+  it('should return empty array, when empty array is passed',function() {
+    assert.deepEqual(mapPrime(square,[]),[]);
+    assert.deepEqual(mapPrime(incrementBy,[]),[]);
+  });
+
+  it('should return array of single element, when array of single element is passed',function() {
+    assert.deepEqual(mapPrime(square,[0]),[0]);
+    assert.deepEqual(mapPrime(incrementBy,[0]),[1]);
+    assert.deepEqual(mapPrime(square,[1]),[1]);
+    assert.deepEqual(mapPrime(incrementBy,[1]),[2]);
+  });
+
+  it('should preserve the length of array, when array of multiple elements is passed',function() {
+    assert.deepEqual(mapPrime(square,[1,2,3]),[1,4,9]);
+    assert.deepEqual(mapPrime(square,[-1,-2,-3]),[1,4,9]);
+    assert.deepEqual(mapPrime(incrementBy,[1,2,3]),[2,3,4]);
+    assert.deepEqual(mapPrime(incrementBy,[-1,-2,-3]),[0,-1,-2]);
   });
 
 });
