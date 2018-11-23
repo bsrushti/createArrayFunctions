@@ -32,6 +32,10 @@ const returnFalse = function() {
   return false;
 }
 
+const multiplication = function(firstNumber, secondNumber) { 
+  return firstNumber * secondNumber;
+}
+
 describe('Map',function(){
 
   incrementBy = increment(1);
@@ -82,6 +86,7 @@ describe('Reduce',function(){
 
   it('should return value of accumulator, when empty array is passed',function() { 
     assert.equal(reduce(add, 1, []),1);
+    assert.equal(reduce(multiplication, 1, []),1);
   });
 
   it('should return result, when one or more elements in array is passed',function() { 
@@ -89,6 +94,9 @@ describe('Reduce',function(){
     assert.equal(reduce(add, 3, [1,2]),6);
     assert.equal(reduce(add, 5, [5,5,5,5]),25);
     assert.equal(reduce(add, -1, [-1,-2,-2,-3]),-9);
+    assert.equal(reduce(multiplication, 1, [0]),0);
+    assert.equal(reduce(multiplication, 3, [1,2]),6);
+    assert.equal(reduce(multiplication, -1, [-1,-2,-2]),4);
   });
 
 });
